@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="Transition.cs" company="https://github.com/marked-one">
+// <copyright file="Transition.cs" company="https://github.com/marked-one/EasyStateMachine">
 //     Copyright © 2014 Vladimir Klubkov. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -11,12 +11,17 @@ namespace EasyStateMachine
 	/// NOTE: Derived classes should be disabled in Inspector.
 	public abstract class Transition : MonoBehaviour
 	{
-		/// Target state.
-		public State TargetState;
+        /// Target state.
+        [SerializeField]
+        State targetState;
 
-		/// Set this property to 'true'
-	    /// when transition should happen
-		/// and to 'false' otherwise.
+        /// Gets target state.
+		public State TargetState
+        {
+            get { return targetState; }
+        }
+
+		/// Set this property to 'true' when transition should happen.
 		public bool NeedTransit
 		{
 			get;

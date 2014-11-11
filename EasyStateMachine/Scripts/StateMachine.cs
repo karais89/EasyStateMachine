@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="StateMachine.cs" company="https://github.com/marked-one">
+// <copyright file="StateMachine.cs" company="https://github.com/marked-one/EasyStateMachine">
 //     Copyright © 2014 Vladimir Klubkov. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -11,7 +11,8 @@ namespace EasyStateMachine
 	public class StateMachine : MonoBehaviour
 	{
 		/// Starting state.
-		public State StartingState;
+	    [SerializeField]
+        State startingState;
 		
 		/// Current state.
 		State current;
@@ -31,7 +32,7 @@ namespace EasyStateMachine
 		/// Resets the state machine via transition to starting state.
 		public void Reset()
 		{
-			Transit(StartingState);
+			Transit(startingState);
 		}
 		
 		/// Changes states when necessary.

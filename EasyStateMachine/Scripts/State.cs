@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="State.cs" company="https://github.com/marked-one">
+// <copyright file="State.cs" company="https://github.com/marked-one/EasyStateMachine">
 //     Copyright © 2014 Vladimir Klubkov. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -13,13 +13,13 @@ namespace EasyStateMachine
 	public abstract class State : MonoBehaviour
 	{
 		/// List of transitions from this state.
-		[Tooltip("List of transitions from this state.")]
-		public List<Transition> Transitions = new List<Transition> ();
+		[SerializeField, Tooltip("List of transitions from this state.")]
+	    List<Transition> transitions = new List<Transition> ();
 
-		// Returns next state, if a transition should happen, null otherwise.
+		/// Returns next state if transition is necessary, 'null' otherwise.
 		public virtual State GetNext()
 		{
-			foreach (var transition in Transitions) 
+			foreach (var transition in transitions) 
 			{
 				if (transition.NeedTransit )
 					return transition.TargetState;
@@ -28,12 +28,12 @@ namespace EasyStateMachine
 			return null;
 		}
 	
-		/// Exits currenr state.
+		/// Disables state and its transitions.
 		public virtual void Exit()
 		{
 			if(enabled)
 			{
-				foreach(var transition in Transitions)
+				foreach(var transition in transitions)
 				{
 					transition.enabled = false;
 				}
@@ -42,17 +42,23 @@ namespace EasyStateMachine
 			}
 		}
 		
-		/// Enters current state.
+		/// Enables state and its transitions.
 		public virtual void Enter()
 		{
 			if(!enabled)
 			{
 				enabled = true;
-				foreach(var transition in Transitions)
+				foreach(var transition in transitions)
 				{
 					transition.enabled = true;
 				}
 			}
 		}
+
+        /// This method is implemented only to show the 
+        /// enabled/disabled checkbox in Inspector for each state.
+        protected virtual void FixedUpdate()
+        {
+        }
 	}
 }

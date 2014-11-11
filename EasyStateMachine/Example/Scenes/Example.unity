@@ -201,8 +201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e20d262eaa3bff74daeb83ee2c556b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetState: {fileID: 720163793}
-  WaitTime: 2
+  targetState: {fileID: 720163793}
+  time: 2
 --- !u!114 &720163791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,8 +214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e20d262eaa3bff74daeb83ee2c556b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetState: {fileID: 720163794}
-  WaitTime: 2
+  targetState: {fileID: 720163794}
+  time: 2
 --- !u!114 &720163792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b035c23c0461049a6f70b17b35e28e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingState: {fileID: 720163794}
+  startingState: {fileID: 720163794}
 --- !u!114 &720163793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,10 +239,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 536d89c2c9815124894fbcc2a48a4bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Transitions:
+  transitions:
   - {fileID: 720163791}
-  GameObject: {fileID: 1945077070}
-  MovementSpeed: 4
+  transformToMove: {fileID: 1945077074}
+  speed: {x: -4, y: 0, z: 0}
 --- !u!114 &720163794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,10 +254,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f34b498d317fe474d97156b5e8ca448b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Transitions:
+  transitions:
   - {fileID: 720163790}
-  GameObject: {fileID: 1945077070}
-  MovementSpeed: 4
+  transformToMove: {fileID: 1945077074}
+  speed: {x: 4, y: 0, z: 0}
 --- !u!1 &1945077070
 GameObject:
   m_ObjectHideFlags: 0

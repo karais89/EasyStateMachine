@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="TimerTransition.cs" company="https://github.com/marked-one">
+// <copyright file="TimerTransition.cs" company="https://github.com/marked-one/EasyStateMachine">
 //     Copyright © 2014 Vladimir Klubkov. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -8,13 +8,14 @@ namespace EasyStateMachine.Example
 	using UnityEngine;
 	using System.Collections;
 
-	/// Represents transition by timer.
+	/// Represents the transition by timer.
 	public class TimerTransition : Transition 
 	{
-		/// Time to wait until transition happens.
-		public float WaitTime;
+		/// Time in seconds.
+	   	[SerializeField, Tooltip("Time in seconds.")]
+		float time;
 
-		/// Starts timer.
+		/// Starts timer and resets the NeedTransit property.
 		void OnEnable()
 		{
 			NeedTransit = false;
@@ -24,7 +25,7 @@ namespace EasyStateMachine.Example
 		/// Timer coroutine.
 		IEnumerator Timer()
 		{
-			yield return new WaitForSeconds(WaitTime);
+			yield return new WaitForSeconds(time);
 			NeedTransit = true;
 		}
 
