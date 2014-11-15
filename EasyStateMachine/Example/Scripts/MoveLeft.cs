@@ -5,8 +5,8 @@
 //-----------------------------------------------------------------------
 namespace EasyStateMachine.Example
 {
-	/// Represents movement to the left.
-	public class MoveLeft : TranslateState 
-	{
-	}
+    /// Represents the left movement state.
+    public class MoveLeft : State 
+    {
+    }
 }

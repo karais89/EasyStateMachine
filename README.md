@@ -3,21 +3,22 @@ Easy State Machine
 
 Simple state machine for [Unity3d](http://unity3d.com/) written in C#.
 
-This package is for programmers: you have to implement your own states and transitions in C#.
+This package is for programmers: you have to implement your own states, actions and transitions in C#.
 
 ##Usage
 
 1. Import EasyStateMachine package.
 2. Add StateMachine as a Component to a GameObject.
 3. Implement your states by inheriting them from the State class.
-4. Implement your transitions by inheriting them from the Transition class.
-5. Add your states and transitions as Components to GameObejcts.
-6. Drag the initial state to the StartingState field of StateMachine.
-7. Drag the appropriate states to the TargetState fields of each Transition.
-8. Add transitions to the Transitions lists of proper states.
-9. Disable all States and Transitions in Inspector.
-10. The state machine is ready to run.
-11. Use Inspector to visually debug the state machine.
+4. Implement your actions by inheriting them from the Action class.
+5. Implement your transitions by inheriting them from the Transition class.
+6. Add your states, actions and transitions as Components to GameObejcts.
+7. Drag the initial state to the StartingState field of StateMachine.
+8. Drag the appropriate states to the Current and Next fields of each Transition.
+9. Draget the appropriate states to the State field of each Action.
+10. Ensure, that all states, actions and transitions are disabled in the Inspector (collapsed components are not disabled automatically).
+11. The state machine is ready to run.
+12. Use Inspector to visually debug the state machine.
 
 ## License
 

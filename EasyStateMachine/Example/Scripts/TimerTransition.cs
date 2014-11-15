@@ -5,34 +5,33 @@
 //-----------------------------------------------------------------------
 namespace EasyStateMachine.Example
 {
-	using UnityEngine;
-	using System.Collections;
+    using UnityEngine;
+    using System.Collections;
 
-	/// Represents the transition by timer.
-	public class TimerTransition : Transition 
-	{
-		/// Time in seconds.
-	   	[SerializeField, Tooltip("Time in seconds.")]
-		float time;
+    /// Represent the transition by timer.
+    public class TimerTransition : Transition 
+    {
+        /// Time in seconds.
+        [SerializeField, Tooltip("Time in seconds.")]
+        float time;
 
-		/// Starts timer and resets the NeedTransit property.
-		void OnEnable()
-		{
-			NeedTransit = false;
-			StartCoroutine("Timer");
-		}
+        // Starts the Timer coroutine.
+        void OnEnable()
+        {
+            StartCoroutine("Timer");
+        }
 
-		/// Timer coroutine.
-		IEnumerator Timer()
-		{
-			yield return new WaitForSeconds(time);
-			NeedTransit = true;
-		}
+        /// Timer.
+        IEnumerator Timer()
+        {
+            yield return new WaitForSeconds(time);
+            NeedTransit = true;
+        }
 
-		/// Stops timer.
-		void OnDisable()
-		{
-			StopCoroutine("Timer");
-		}
-	}
+        /// Stops the Timer coroutine.
+        void OnDisable()
+        {
+            StopCoroutine ("Timer");
+        }
+    }
 }
