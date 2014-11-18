@@ -13,7 +13,7 @@ namespace EasyStateMachine
 #endif
 
     /// Represents the base class for states.
-    public abstract class State : Base
+    public abstract class State : VariablesStorage
     {
         /// State belongs to this state machine.
         /// It is set automatically in the editor.
@@ -21,10 +21,7 @@ namespace EasyStateMachine
         StateMachine stateMachine;
 
         /// Gets the state machine.
-        public StateMachine StateMachine
-        {
-            get { return stateMachine; }
-        }
+        public StateMachine StateMachine { get { return stateMachine; } }
 
         /// List of actions for this state.
         /// Actions are added/removed automatically in the editor.
@@ -44,24 +41,6 @@ namespace EasyStateMachine
             actions.RemoveAll (item => item == action || item == null);
         }
 
-        /// List of transitions for this state.
-        /// Transitions are added/removed automatically in the editor.
-        [SerializeField, HideInInspector]
-        List<Transition> transitions = new List<Transition> ();
-
-        /// Adds the specified  transition to state.
-        public void AddTransition(Transition transition)
-        {
-            if (transition != null && !transitions.Contains (transition))
-                transitions.Add (transition);
-        }
-
-        /// Removes the specified  transition from state.
-        public void RemoveTransition(Transition transition)
-        {
-            transitions.RemoveAll (item => item == transition || item == null);
-        }
-
         /// Enables the state, its actions and transitions.
         public virtual void Enter()
         {
@@ -69,13 +48,9 @@ namespace EasyStateMachine
             {
                 enabled = true;
                 RemoveAction (null);
-                foreach (var action in actions) {
+                foreach (var action in actions) 
+                {
                     action.Enter ();
-                }
-
-                RemoveTransition (null);
-                foreach (var transition in transitions) {
-                    transition.Enter ();
                 }
             }
         }
@@ -85,13 +60,9 @@ namespace EasyStateMachine
         {
             if (enabled) 
             {
-                RemoveTransition (null);
-                foreach (var transition in transitions) {
-                    transition.Exit ();
-                }
-
                 RemoveAction (null);
-                foreach (var action in actions) {
+                foreach (var action in actions) 
+                {
                     action.Exit ();
                 }
             
@@ -107,18 +78,6 @@ namespace EasyStateMachine
         }
 
 #if UNITY_EDITOR
-        /// Gets the transitions info.
-        public string TransitionsInfo
-        {
-            get
-            {
-                if(transitions == null || transitions.Count <= 0)
-                    return "State has no outgoing transitionss";
-                
-                return "Outgoing transitions:\n" + GetInfo(transitions);
-            }
-        }
-
         /// Gets the actions info.
         public string ActionsInfo
         {
@@ -142,10 +101,11 @@ namespace EasyStateMachine
             this.stateMachine = stateMachine;
             EditorUtility.SetDirty (this);
 
-            RemoveTransition (null);
-            foreach(var transition in transitions)
+            RemoveAction(null);
+            foreach (var action in actions)
             {
-                if(transition.Next != null)
+                var transition = action as Transition;
+                if (transition != null && transition.Next != null)
                     transition.Next.SetStateMachine(processed, stateMachine);
             }
         }

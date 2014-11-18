@@ -37,7 +37,6 @@ namespace EasyStateMachine.Editor
                     EditorGUILayout.HelpBox("State machine:\n" + state.StateMachine.Info, MessageType.Info);
 
                 EditorGUILayout.HelpBox(state.ActionsInfo, MessageType.Info);
-                EditorGUILayout.HelpBox(state.TransitionsInfo, MessageType.Info);
             }
         }
 

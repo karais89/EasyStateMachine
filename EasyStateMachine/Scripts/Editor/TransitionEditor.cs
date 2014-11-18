@@ -16,7 +16,7 @@ namespace EasyStateMachine.Editor
         Transition transition;
 
         /// Previously set origin state.
-        State previousCurrent;
+        State previousState;
 
         /// Previously set destination state.
         State previousNext;
@@ -25,7 +25,7 @@ namespace EasyStateMachine.Editor
         void OnEnable()
         {
             GetTarget (out transition);
-            previousCurrent = transition.Current;
+            previousState = transition.State;
             previousNext = transition.Next;
         }
 
@@ -56,7 +56,7 @@ namespace EasyStateMachine.Editor
                 return;
 
             // Store state machines because component fields might be cleared.
-            var previousCurrentStateMachine = GetStateMachineOfState(previousCurrent); 
+            var previousCurrentStateMachine = GetStateMachineOfState(previousState); 
             var previousNextStateMachine = GetStateMachineOfState(previousNext);
             ClearStateMachineOfState(previousNext);
             previousNext = transition.Next;
@@ -68,16 +68,16 @@ namespace EasyStateMachine.Editor
         /// Handles origin state change.
         void HandleCurrentChange()
         {
-            if (previousCurrent == transition.Current) 
+            if (previousState == transition.State) 
                 return;
 
             // Store state machines because component fields might be cleared.
-            var previousCurrentStateMachine = GetStateMachineOfState(previousCurrent);
-            var newCurrentStateMachine = GetStateMachineOfState(transition.Current);
-            RemoveTransitionFromState(transition, previousCurrent);
+            var previousCurrentStateMachine = GetStateMachineOfState(previousState);
+            var newCurrentStateMachine = GetStateMachineOfState(transition.State);
+            RemoveTransitionFromState(transition, previousState);
             ClearStateMachineOfState(previousNext);
-            previousCurrent = transition.Current;
-            AddTransitionToState(transition, previousCurrent);
+            previousState = transition.State;
+            AddTransitionToState(transition, previousState);
             UpdateStateMachine(newCurrentStateMachine);
             if(previousCurrentStateMachine != newCurrentStateMachine)
                 UpdateStateMachine(previousCurrentStateMachine);
@@ -108,7 +108,7 @@ namespace EasyStateMachine.Editor
         {
             if (state != null) 
             {   
-                state.RemoveTransition (transition);
+                state.RemoveAction(transition);
                 EditorUtility.SetDirty(state);
             }
         }
@@ -118,7 +118,7 @@ namespace EasyStateMachine.Editor
         {
             if(state != null)
             {
-                state.AddTransition(transition);
+                state.AddAction(transition);
                 EditorUtility.SetDirty(state);
             }
         }
@@ -126,7 +126,7 @@ namespace EasyStateMachine.Editor
         /// Shows warnings.
         void DrawWarnings()
         {
-            if(transition.Current == null)
+            if(transition.State == null)
                 EditorGUILayout.HelpBox("Current state is not assigned.", MessageType.Warning);
             
             if(transition.Next == null)

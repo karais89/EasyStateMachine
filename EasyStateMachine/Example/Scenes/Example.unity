@@ -84,7 +84,7 @@ GameObject:
   - 4: {fileID: 291117788}
   - 114: {fileID: 291117789}
   - 114: {fileID: 291117795}
-  - 114: {fileID: 291117793}
+  - 114: {fileID: 291117791}
   - 114: {fileID: 291117792}
   - 114: {fileID: 291117790}
   m_Layer: 0
@@ -132,9 +132,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e55aafd10792b904fa4be1fc0a89519d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  current: {fileID: 291117792}
+  state: {fileID: 291117792}
   next: {fileID: 291117795}
-  time: 2
+  seconds: 2
+  in: 0
+--- !u!114 &291117791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 291117787}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e82cccf21e24aae4d9296a489884a323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: {fileID: 291117795}
+  next: {fileID: 291117792}
+  global: 0
+  float: X
+  is: 1
+  value: 4
+  in: 0
 --- !u!114 &291117792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,22 +168,9 @@ MonoBehaviour:
   stateMachine: {fileID: 291117789}
   actions:
   - {fileID: 686538457}
-  transitions:
+  - {fileID: 686538458}
+  - {fileID: 686538461}
   - {fileID: 291117790}
---- !u!114 &291117793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 291117787}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e55aafd10792b904fa4be1fc0a89519d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  current: {fileID: 291117795}
-  next: {fileID: 291117792}
-  time: 2
 --- !u!114 &291117795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,8 +185,9 @@ MonoBehaviour:
   stateMachine: {fileID: 291117789}
   actions:
   - {fileID: 686538456}
-  transitions:
-  - {fileID: 291117793}
+  - {fileID: 686538459}
+  - {fileID: 686538460}
+  - {fileID: 291117791}
 --- !u!1 &582495179
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,7 +284,11 @@ GameObject:
   - 65: {fileID: 686538454}
   - 23: {fileID: 686538453}
   - 114: {fileID: 686538456}
+  - 114: {fileID: 686538459}
+  - 114: {fileID: 686538460}
   - 114: {fileID: 686538457}
+  - 114: {fileID: 686538458}
+  - 114: {fileID: 686538461}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -349,8 +360,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: {fileID: 291117795}
-  transformToMove: {fileID: 0}
-  speed: {x: 4, y: 0, z: 0}
+  the: {fileID: 0}
+  global: 0
+  variable: 
+  in: 0
+  constantSpeed: {x: 4, y: 0, z: 0}
 --- !u!114 &686538457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,5 +377,78 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: {fileID: 291117792}
-  transformToMove: {fileID: 0}
-  speed: {x: -4, y: 0, z: 0}
+  the: {fileID: 0}
+  global: 0
+  variable: 
+  in: 0
+  constantSpeed: {x: -4, y: 0, z: 0}
+--- !u!114 &686538458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 686538451}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938226251adb5d4489413291ea7abe93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: {fileID: 291117792}
+  of: {fileID: 0}
+  global: 0
+  vector: Position
+  in: 0
+--- !u!114 &686538459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 686538451}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938226251adb5d4489413291ea7abe93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: {fileID: 291117795}
+  of: {fileID: 0}
+  global: 0
+  vector: Position
+  in: 0
+--- !u!114 &686538460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 686538451}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77da56f0a13eec7428dcc5eee54895b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: {fileID: 291117795}
+  global: 0
+  vector: Position
+  globals: 0
+  x: X
+  y: 
+  z: 
+  in: 0
+--- !u!114 &686538461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 686538451}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77da56f0a13eec7428dcc5eee54895b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: {fileID: 291117792}
+  global: 0
+  vector: Position
+  globals: 0
+  x: X
+  y: 
+  z: 
+  in: 0

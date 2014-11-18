@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="Base.cs" company="https://github.com/marked-one/EasyStateMachine/EasyStateMachine">
+// <copyright file="Base.cs" company="https://github.com/marked-one/EasyStateMachine">
 //     Copyright © 2014 Vladimir Klubkov. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -9,7 +9,7 @@ namespace EasyStateMachine
     using System.Collections.Generic;
     using System.Text;
 
-    // Represent base class for state machine components.
+    /// Represent base class for state machine components.
     public abstract class Base : MonoBehaviour 
     {
 #if UNITY_EDITOR
@@ -48,10 +48,7 @@ namespace EasyStateMachine
             var sb = new StringBuilder ();
             foreach (var item in lst) 
             {
-                if (item == null)
-                    sb.AppendLine ("null");
-                else
-                    sb.AppendLine (item.Info);
+                sb.AppendLine (item.Info);
             }
             
             return sb.ToString ();

@@ -8,33 +8,24 @@ namespace EasyStateMachine
 	using UnityEngine;
 
     /// Represents the base class for transitions.
-    /// NOTE: derived classes should be disabled in Inspector.
-    public abstract class Transition : Base
+    /// Transition is the special type of actions, 
+    /// which could initiate the state change.
+    /// Derived classes should be disabled in Inspector.
+    public abstract class Transition : Action
     {
-        /// Origin.
-        [SerializeField, Tooltip("Origin.")]
-        State current;
-
-        /// Gets current state.
-        public State Current
-        {
-            get { return current; }
-        }
-      
-        /// Destination.
-        [SerializeField, Tooltip("Destination.")]
+#pragma warning disable 0649
+        /// Destination state.
+        [SerializeField, Tooltip("Destination state.")]
         State next;
+#pragma warning restore 0649
 
         /// Gets next state.
-        public State Next
-        {
-            get { return next; }
-        }
+        public State Next { get { return next; } }
 
         /// If true, transition should happen.
         bool needTransit;
 
-        /// Set it to true when transition should happen.
+        /// Set it to true in derived classes when transition should happen.
         /// It is reset automatically when current state is entered.
         protected bool NeedTransit
         {
@@ -42,26 +33,19 @@ namespace EasyStateMachine
             set 
             {
                 needTransit = value;
-                if(needTransit && Current != null && Current.StateMachine != null)
-                    Current.StateMachine.Transit(Next);
+                if (needTransit && State != null && State.StateMachine != null)
+                    State.StateMachine.Transit(Next);
             }
         }
 
         /// Enables transition and resets the NeedTransit property.
-        public virtual void Enter()
+        public override void Enter()
         {
             if (!enabled) 
             {
                 NeedTransit = false;
                 enabled = true;
             }
-        }
-
-        /// Disables transition.
-        public virtual void Exit()
-        {
-            if(enabled)
-                enabled = false;
         }
     }
 }

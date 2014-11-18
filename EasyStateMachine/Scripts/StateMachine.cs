@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------
+﻿//-----------------------------------------------------------------------
 // <copyright file="StateMachine.cs" company="https://github.com/marked-one/EasyStateMachine">
 //     Copyright © 2014 Vladimir Klubkov. All rights reserved.
 // </copyright>
@@ -9,8 +9,9 @@ namespace EasyStateMachine
     using System.Collections.Generic;
 
     /// Represents the state machine.
-    public class StateMachine : Base
+    public class StateMachine : VariablesStorage
     {
+#pragma warning disable 0649
         /// List of states in state machine.
         [SerializeField, HideInInspector]
         List<State> states = new List<State> ();
@@ -18,27 +19,22 @@ namespace EasyStateMachine
         /// Starting state.
         [SerializeField]
         State startingState;
+#pragma warning restore 0649
 
         /// Gets starting state.
-        public State StartingState
-        {
-            get { return startingState; }
-        }
+        public State StartingState { get { return startingState; } }
 
         /// Currently active state.
         State current;
 
         /// Gets current state.
-        public State Current
-        {
-            get { return current; }
-        }
+        public State Current { get { return current; } }
 
         /// Initialization.
-    	void Start () 
+        void Start()
         {
             Reset ();
-    	}
+        }
 
         /// Resets the state machine.
         public void Reset()
