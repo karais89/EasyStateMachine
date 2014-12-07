@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------
+﻿//-----------------------------------------------------------------------
 // <copyright file="StateMachineEditor.cs" company="https://github.com/marked-one/EasyStateMachine">
 //     Copyright © 2014 Vladimir Klubkov. All rights reserved.
 // </copyright>
@@ -9,79 +9,91 @@ namespace EasyStateMachine.Editor
     using UnityEngine;
     using UnityEditor;
 
-    /// Represents the editor part of StateMachine.
+    /// Represents the Editor part of StateMachine.
     [CustomEditor(typeof(StateMachine), true)]
     public class StateMachineEditor : EditorBase
     {
-        /// Actual StateMachine component.
+        #region Private
+        /// Actual StateMachine.
         StateMachine stateMachine;
 
-        /// If is true, the info is drawn.
+        /// If it is true, the info is drawn.
         bool needDrawInfo;
 
-        /// Previously set starting state.
-        State oldStartingState;
+        /// Previously set initial state.
+        State oldInitialState;
 
         /// Initialization.
         void OnEnable()
         {
-            GetTarget (out stateMachine);
-            oldStartingState = stateMachine.StartingState;
+            GetTarget(out stateMachine);
+            oldInitialState = stateMachine.InitialState;
         }
+        #endregion
 
-        /// Updates the StateMachine Inspector.
+        /// Updates the StateMachine Inspector GUI.
         public override void OnInspectorGUI()
         {
-            GetTarget (out stateMachine);
-            DrawDefaultInspector ();
+            GetTarget(out stateMachine);
+            DrawDefaultInspector();
             HandleChanges();
             DrawInfo();
             DrawWarnings();
         }
 
+        #region Private
         /// Handles GUI changes.
         void HandleChanges()
         {
-            if(GUI.changed)
-                HandleStartingStateChange();
+            if (GUI.changed)
+                HandleInitialStateChange();
         }
 
-        /// Handles starting state changes.
-        void HandleStartingStateChange()
+        /// Handles initial state changes.
+        void HandleInitialStateChange()
         {
-            if(oldStartingState != stateMachine.StartingState)
+            if (oldInitialState != stateMachine.InitialState)
             {
-                UpdateStateMachine(oldStartingState, null);
-                oldStartingState = stateMachine.StartingState;
-                UpdateStateMachine(oldStartingState, stateMachine);
+                ClearStateMachineForState(oldInitialState);
+                oldInitialState = stateMachine.InitialState;
+                RebuildStateMachine(stateMachine);
             }
         }
 
-        /// Sets the specified state machine to all connected states.
-        public static void UpdateStateMachine(State startingState, StateMachine stateMachine)
+        /// Clears the state machine field of the specified state and all connected states.
+        static void ClearStateMachineForState(State state)
         {
-            if(stateMachine != null)
-                stateMachine.SetStateMachineToStates();
-            else if(startingState != null)
+            if (state != null)
             {
-                var processed = new List<State> ();
-                startingState.SetStateMachine(processed, null);
+                var processed = new List<State>();
+                state.SetStateMachine(processed, null);
             }
+        }
+
+        /// Sets the specified state machine reference to all connected states.
+        static void RebuildStateMachine(StateMachine stateMachine)
+        {
+            if (stateMachine != null)
+                stateMachine.RebuildStateMachine();
         }
 
         /// Shows info.
         void DrawInfo()
         {
             needDrawInfo = EditorGUILayout.Foldout(needDrawInfo, "State machine info");
-            if (needDrawInfo) 
-                EditorGUILayout.HelpBox (stateMachine.StatesInfo, MessageType.Info);
+            if (needDrawInfo)
+            {
+                EditorGUILayout.HelpBox(stateMachine.Info, MessageType.Info);
+                Repaint();
+            }
         }
 
         /// Shows warnings.
         void DrawWarnings()
         {
-            if(stateMachine.StartingState == null)
-                EditorGUILayout.HelpBox("Starting state is not assigned", MessageType.Warning);
+            if (stateMachine.InitialState == null)
+                EditorGUILayout.HelpBox("Initial state is not assigned", MessageType.Warning);
         }
+        #endregion
     }
 }

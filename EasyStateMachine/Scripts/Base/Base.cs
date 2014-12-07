@@ -6,53 +6,45 @@
 namespace EasyStateMachine
 {
     using UnityEngine;
-    using System.Collections.Generic;
-    using System.Text;
 
-    /// Represent base class for state machine components.
-    public abstract class Base : MonoBehaviour 
+    /// Represent the very base class for all Easy CurrentStateTransition Machine components.
+    public abstract class Base : MonoBehaviour
     {
+        #region Editor
 #if UNITY_EDITOR
-        /// Gets the component info.
-        public string Info
+        /// Gets the component path. The path consists of the path 
+        /// of the game object the component is attached to in 
+        /// the scene hierarchy and the type of the component.
+        public string Path
         {
             get
             {
-                var sceneHierarchyPath = GetSceneHierarchyPath ();
-                var typeName = GetType ().Name;
+                var sceneHierarchyPath = GetPathInSceneHierarchy();
+                var typeName = GetType().Name;
                 return sceneHierarchyPath + ":" + typeName;
             }
         }
 
-        /// Gets the path of the game object in the scene hierarchy.
-        string GetSceneHierarchyPath()
+        #region Private
+        /// Gets the path of the game object the 
+        /// component is attached to in scene hierarchy.
+        string GetPathInSceneHierarchy()
         {
-            var obj = gameObject;
-            var path = "/" + obj.name;
-            while (obj.transform.parent != null)
+            var temp = gameObject.transform;
+            if (temp == null)
+                return "/" + gameObject.name;
+
+            var path = string.Empty;
+            while (temp != null)
             {
-                obj = obj.transform.parent.gameObject;
-                if(obj != null)
-                    path = "/" + obj.name + path;
+                path = "/" + temp.name + path;
+                temp = temp.parent;
             }
-            
+
             return path;
         }
-
-        /// Gets the textual info about the specified 
-        /// list of objects derived from Base.
-        public string GetInfo<Type>(List<Type> lst)
-            where Type : Base
-        {
-            lst.RemoveAll (item => item == null);
-            var sb = new StringBuilder ();
-            foreach (var item in lst) 
-            {
-                sb.AppendLine (item.Info);
-            }
-            
-            return sb.ToString ();
-        }
+        #endregion
 #endif
+        #endregion
     }
 }

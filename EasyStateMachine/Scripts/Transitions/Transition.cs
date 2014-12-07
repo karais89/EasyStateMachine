@@ -1,51 +1,53 @@
-//-----------------------------------------------------------------------
+﻿//-----------------------------------------------------------------------
 // <copyright file="Transition.cs" company="https://github.com/marked-one/EasyStateMachine">
 //     Copyright © 2014 Vladimir Klubkov. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 namespace EasyStateMachine
 {
-	using UnityEngine;
+    using UnityEngine;
 
-    /// Represents the base class for transitions.
-    /// Transition is the special type of actions, 
+    /// Represents the base class for Transitions.
+    /// Transition is special type of Functions, 
     /// which could initiate the state change.
-    /// Derived classes should be disabled in Inspector.
-    public abstract class Transition : Action
+    /// !!! Transitions should be disabled in Inspector.
+    public abstract class Transition : Function
     {
+        #region Private
 #pragma warning disable 0649
-        /// Destination state.
-        [SerializeField, Tooltip("Destination state.")]
-        State next;
+        /// The state this Transition transits to.
+        [Header("Transit"), SerializeField, Tooltip("The state this Transition transits to.")]
+        State _to;
 #pragma warning restore 0649
 
-        /// Gets next state.
-        public State Next { get { return next; } }
-
         /// If true, transition should happen.
-        bool needTransit;
+        bool _needTransit;
+        #endregion
+
+        /// Gets next state.
+        public State To { get { return _to; } }
 
         /// Set it to true in derived classes when transition should happen.
         /// It is reset automatically when current state is entered.
         protected bool NeedTransit
         {
-            get { return needTransit; }
-            set 
+            get { return _needTransit; }
+            set
             {
-                needTransit = value;
-                if (needTransit && State != null && State.StateMachine != null)
-                    State.StateMachine.Transit(Next);
+                _needTransit = value;
+                if (_needTransit && State != null && State.StateMachine != null)
+                    State.StateMachine.Transit(To);
             }
         }
 
         /// Enables transition and resets the NeedTransit property.
         public override void Enter()
         {
-            if (!enabled) 
-            {
-                NeedTransit = false;
-                enabled = true;
-            }
+            if (enabled)
+                return;
+
+            NeedTransit = false;
+            enabled = true;
         }
     }
 }
