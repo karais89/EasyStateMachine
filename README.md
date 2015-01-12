@@ -3,7 +3,7 @@ Easy State Machine
 
 Simple state machine for [Unity3d](http://unity3d.com/) written in C#.
 
-This package is still mostly for programmers: only some Functions and Transitions are currently implemented.
+The goal of this package is to create the visual scripting solution, just like Playmaker, but it is still mostly for programmers: only some Functions and Transitions are currently implemented.
 
 ##Usage
 
