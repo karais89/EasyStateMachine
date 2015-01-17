@@ -13,7 +13,9 @@ Contains 3 scenes made with Easy State Machine without programming:
 - Menu, 
 - 2d game (`Space` to start, `←` and `→` to play),
 - 3d game (`w`, `a`, `s`, `d` to move, mouse to rotate).
-Use `Settings` button to switch between 2d and 3d games.
+
+Use `Settings` button in the menu to switch between 2d and 3d games.
+Refresh the page to return to the menu.
 
 ##Usage
 
