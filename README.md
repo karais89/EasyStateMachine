@@ -5,6 +5,16 @@ Simple state machine for [Unity3d](http://unity3d.com/) written in C#.
 
 The goal of this package is to create the visual scripting solution, just like Playmaker, but it is still mostly for programmers: only some Functions and Transitions are currently implemented.
 
+##Online example
+
+[Try here](http://marked-one.github.io/EasyStateMachine/).
+
+Contains 3 scenes made with Easy State Machine without programming:
+- Menu, 
+- 2d game (`Space` to start, `←` and `→` to play),
+- 3d game (`w`, `a`, `s`, `d` to move, mouse to rotate).
+Use `Settings` button to switch between 2d and 3d games.
+
 ##Usage
 
 1. Import the EasyStateMachine package.
