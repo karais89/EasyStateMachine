@@ -172,6 +172,6 @@ namespace EasyStateMachine
             Handles.Label(transform.position, message, style);
             DestroyImmediate(tex);
         }
-    }
 #endif
+    }
 }
