@@ -20,7 +20,7 @@ Refresh the page to return to the menu.
 
 ##Usage
 
-0. Download the EasyStateMachine package.
+0. [Download](https://github.com/marked-one/EasyStateMachine/releases/tag/v0.5) the EasyStateMachine package.
 1. Import the EasyStateMachine package.
 2. Add the StateMachine component to any GameObject.
 3. Add State components to any GameObject.
