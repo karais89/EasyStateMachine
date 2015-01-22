@@ -1,15 +1,16 @@
 Easy State Machine
 ===
 
-Simple state machine for [Unity3d](http://unity3d.com/) written in C#.
+Simple state machine for Unity3d written in C#.
 
-The goal of this package is to create the visual scripting solution, just like Playmaker, but it is still mostly for programmers: only some Functions and Transitions are currently implemented.
+The goal of this package is to create the visual scripting solution (think of Playmaker).
+Currently it is still under development and could be successfully used by the programmers only.
 
-##Online example
+##Example
 
-[Try here](http://marked-one.github.io/EasyStateMachine/).
+[Online sample made with Easy State Machine without programming](http://marked-one.github.io/EasyStateMachine/).
 
-Contains 3 scenes made with Easy State Machine without programming:
+Contains 3 scenes:
 - Menu, 
 - 2d game (`Space` to start, `←` and `→` to play),
 - 3d game (`w`, `a`, `s`, `d` to move, mouse to rotate).
@@ -19,24 +20,25 @@ Refresh the page to return to the menu.
 
 ##Usage
 
+0. Download the EasyStateMachine package.
 1. Import the EasyStateMachine package.
-2. Add StateMachine as a Component to any GameObject.
-3. Add States as Components to any GameObjects.
-4. Add Functions as Components to any GameObjects.
-5. Add Transitions as Components to any GameObjects.
+2. Add the StateMachine component to any GameObject.
+3. Add State components to any GameObject.
+4. Add Function components to any GameObject.
+5. Add Transition components to any GameObject.
 6. Drag the initial State to the InitialState field of StateMachine.
-7. Drag the appropriate States to the State and To fields of each Transition.
-8. Drag the appropriate States to the State field of each Function.
-9. Fill other necessary fields of Functions and Transitions.
-10. Ensure that all States, Functions and Transitions are disabled in the Inspector (note: collapsed components aren't disabled automatically).
-11. Use Inspector and Gizmos to visually debug the StateMachines.
-12. Implement your own Functions and Transitions, if necessary.
+7. Drag the appropriate State to the State field of each Function (and each Transition too).
+8. Drag the appropriate State to the To field of each Transition.
+9. Fill other necessary fields of each Function and each Transition.
+10. Ensure that all states, functions and transitions are disabled in the Inspector (note: collapsed components couldn't be disabled automatically).
+11. Use Inspector and Gizmos to visually debug the StateMachine.
+12. Implement your own functions and transitions, if necessary.
 
 ## License
 
 MIT/X11
 
-        Copyright (C) 2014 Vladimir Klubkov
+        Copyright © 2014-2015 Vladimir Klubkov
     
         Permission is hereby granted, free of charge, to any person obtaining a copy of this software
         and associated documentation files (the "Software"), to deal in the Software without
